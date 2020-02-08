@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 public class NetworkTools {
 
@@ -35,7 +36,20 @@ public class NetworkTools {
             }
         }, callback);
     }
-    
+
+    public static void getIpLocation(String ip, CommandCallback callback) {
+        ParallelTask.runParallel(() -> {
+            try {
+                String url = String.format("http://ip-api.com/json/%s?fields=27518454", ip);
+                String content = formatData((new URL(url).openConnection().getInputStream()));
+                System.err.println(content);
+                callback.onFinish(content);
+            } catch (Exception e) {
+                callback.onError(e);
+            }
+        }, callback);
+    }
+
     private static String formatData(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
