@@ -68,5 +68,9 @@ public class TorData {
         torExitAddressURL = newUrl;
     }
 
+    public static void resetTorExitAddressURL() {
+        torExitAddressURL = "https://check.torproject.org/exit-addresses";
+    }
+
 
 }
