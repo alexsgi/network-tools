@@ -6,7 +6,7 @@
 
     <groupId>com.github.alexsgi</groupId>
     <artifactId>network-tools</artifactId>
-    <version>1.0</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
     <name>NetworkTools</name>
 
