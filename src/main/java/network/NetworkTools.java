@@ -7,11 +7,46 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
+import java.net.InetAddress;
+import java.util.ArrayList;
 
 public class NetworkTools {
 
     private static final String osName = System.getProperty("os.name");
+
+    public static void checkForHosts(String subnet, HostCallback callback) {
+        checkForHosts(subnet, callback, 100, 0, 255);
+    }
+
+    public static void checkForHosts(String subnet, HostCallback callback, int timeout) {
+        checkForHosts(subnet, callback, timeout, 0, 255);
+    }
+
+    public static void checkForHosts(String subnet, HostCallback callback, int timeout, int beginIndex) {
+        checkForHosts(subnet, callback, timeout, beginIndex, 255);
+    }
+
+    public static void checkForHosts(String subnet, HostCallback callback, int timeout, int beginIndex, int endIndex) {
+        ParallelTask.runParallel(() -> {
+            try {
+                int tmt = (timeout < 1) ? 1000 : timeout;
+                int begin = (beginIndex < 0 || beginIndex >= 255) ? 0 : beginIndex;
+                int end = (endIndex < 0 || endIndex >= 255 || endIndex < begin) ? 255 : endIndex;
+                ArrayList<String> devices = new ArrayList<>();
+                for (int i = begin; i < end; i++) {
+                    String host = subnet + "." + i;
+                    if (InetAddress.getByName(host).isReachable(tmt)) {
+                        callback.onDeviceFound(host);
+                        devices.add(host);
+                    }
+                }
+                String[] dev = new String[devices.size()];
+                callback.onFinish(devices.toArray(dev));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     public static void ping(String url, CommandCallback callback) {
         ParallelTask.runParallel(() -> {
@@ -32,19 +67,6 @@ public class NetworkTools {
                 String output = formatData(inputStream);
                 callback.onFinish(output);
             } catch (IOException e) {
-                callback.onError(e);
-            }
-        }, callback);
-    }
-
-    public static void getIpLocation(String ip, CommandCallback callback) {
-        ParallelTask.runParallel(() -> {
-            try {
-                String url = String.format("http://ip-api.com/json/%s?fields=27518454", ip);
-                String content = formatData((new URL(url).openConnection().getInputStream()));
-                System.err.println(content);
-                callback.onFinish(content);
-            } catch (Exception e) {
                 callback.onError(e);
             }
         }, callback);
@@ -85,6 +107,14 @@ public class NetworkTools {
             Process process = processBuilder.start();
             return process.getInputStream();
         }
+
+    }
+
+    public static interface HostCallback {
+
+        void onDeviceFound(String host);
+
+        void onFinish(String[] hosts);
 
     }
 
