@@ -1,5 +1,3 @@
-
-
 # NetworkTools
 
 [![](https://jitpack.io/v/alexsgi/network-tools.svg)](https://jitpack.io/#alexsgi/network-tools)
@@ -81,7 +79,7 @@ NetworkTools.tracerout("www.example.com", new CommandCallback() {
 **Important :** 
 ```ping```  and  ```tracerout``` always check if the OS is Windows or Linux. On this way it runs another command on the command line (Linux : ```tracerout``` ; Windows : ```tracert```). ```String output``` is not formatted - just the output of the OS.
 
-→ **Still in development**
+→ **still in development**
 
 ---
 
@@ -143,4 +141,20 @@ static void setTorExitAddressURL(String newUrl);
 ```
 ```java
 static void resetTorExitAddressURL();
+```
+
+---
+
+### Locale lookup :
+
+Get the country code by the country name :
+```java
+LocalFinder.getCountryCode(String countryName);
+```
+Get the country name by the country code :
+```java
+LocalFinder.getCountryName(String countryCode);
+```
+```java
+String name = LocalFinder.getCountryName("DE");
 ```
