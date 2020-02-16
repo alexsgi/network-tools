@@ -82,6 +82,14 @@ public class NetworkTools {
         return sb.toString();
     }
 
+    public static interface HostCallback {
+
+        void onDeviceFound(String host);
+
+        void onFinish(String[] hosts);
+
+    }
+
     private static final class NTools {
 
         private static InputStream tracerouteWin(String url) throws IOException {
@@ -107,14 +115,6 @@ public class NetworkTools {
             Process process = processBuilder.start();
             return process.getInputStream();
         }
-
-    }
-
-    public static interface HostCallback {
-
-        void onDeviceFound(String host);
-
-        void onFinish(String[] hosts);
 
     }
 
