@@ -104,9 +104,9 @@ NetworkTools.checkForHosts("192.168.178", new HostCallback() {
 });
 ```
 Notice :
-*default timeout : 1000 ms
-default begin index : 0
-default end index = 254*
+*default timeout : 1000 ms </br>
+default begin index : 0 </br>
+default end index : 254*
 
 ---
 
