@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class NetworkTools {
@@ -70,6 +73,19 @@ public class NetworkTools {
                 callback.onError(e);
             }
         }, callback);
+    }
+
+    public static String getIpByUrl(URL url) {
+        try {
+            return InetAddress.getByName(url.getHost()).getHostAddress();
+        } catch (IOException ignored) {
+            return null;
+        }
+    }
+
+    public static String getIpByUrl(String url) throws UnknownHostException, MalformedURLException {
+        URL u = new URL(url);
+        return InetAddress.getByName(u.getHost()).getHostAddress();
     }
 
     private static String formatData(InputStream inputStream) throws IOException {
