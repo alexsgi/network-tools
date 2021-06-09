@@ -2,6 +2,8 @@
 
 [![](https://jitpack.io/v/alexsgi/network-tools.svg)](https://jitpack.io/#alexsgi/network-tools)
 
+Tools for some network operations like ping, tracert with Java. Check if an IP address is a TOR exit node.
+
 ## 1. Import
 
 **Gradle:**
