@@ -18,7 +18,7 @@ public class TorData {
         ParallelTask.runParallel(() -> {
             ArrayList<ExitNode> list = getAllExitNodes();
             for (ExitNode node : list) {
-                if (ip != null && ip.toLowerCase().equals(node.getIp().toLowerCase())) {
+                if (ip != null && ip.equalsIgnoreCase(node.getIp())) {
                     callback.onFinish(ip);
                     return;
                 }
@@ -32,7 +32,7 @@ public class TorData {
         String content = checkFromNetwork();
         ArrayList<ExitNode> list = new ArrayList<>();
         assert content != null;
-        String name = null, ip = null;
+        String name = null, ip;
         String[] x = content.split("ExitNode");
         for (String s : x) {
             String[] y = (s.trim() + "\n").split("\n");
@@ -43,7 +43,6 @@ public class TorData {
                     list.add(new ExitNode(name, ip));
                 }
             }
-
         }
         return list;
     }
@@ -71,6 +70,5 @@ public class TorData {
     public static void resetTorExitAddressURL() {
         torExitAddressURL = "https://check.torproject.org/exit-addresses";
     }
-
 
 }

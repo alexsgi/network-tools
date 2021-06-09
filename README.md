@@ -7,73 +7,73 @@
 **Gradle:**
 ```gradle
 allprojects {
-	repositories {
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 ```gradle
 dependencies {
-	implementation 'com.github.alexsgi:network-tools:VERSION'
+    implementation 'com.github.alexsgi:network-tools:VERSION'
 }
 ```
 **Maven:**
 ```maven
 <repositories>
-	<repository>
-		<id>jitpack.io</id>
-		<url>https://jitpack.io</url>
-	</repository>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
 </repositories>
 ```
 ```maven
 <dependencies>
-	<dependency>
-	    <groupId>com.github.alexsgi</groupId>
-	    <artifactId>network-tools</artifactId>
-	    <version>VERSION</version>
-	</dependency>
+    <dependency>
+        <groupId>com.github.alexsgi</groupId>
+        <artifactId>network-tools</artifactId>
+        <version>VERSION</version>
+    </dependency>
 </dependencies>
 ```
 
-## 2. Usage
+## 2. Features
 
-###  Network operations :
+###  Network operations:
  
- **Ping :**
+ **Ping :** (DEPRECATED)
  ```java
 NetworkTools.ping(String url, CommandCallback callback);
 ```
 ```java
-NetworkTools.ping("www.example.com", new CommandCallback() {  
-	@Override  
-	public void onFinish(String output) {  
-		System.out.println(output);  
-	}  
-  
-	@Override  
-	public void onError(Exception e) {  
-		e.printStackTrace();
-	}  
+NetworkTools.ping("www.example.com", new CommandCallback() {
+    @Override 
+    public void onFinish(String output) {
+        System.out.println(output);
+    }
+    
+    @Override 
+    public void onError(Exception e) {
+        e.printStackTrace();
+    }  
 });
 ```
 ---
 
-**Tracerout (*tracert* , *traceroute*) :**
+**Traceroute (*tracert* , *traceroute*):** (DEPRECATED)
 ```java
-NetworkTools.tracerout(String url, CommandCallback callback);
+NetworkTools.traceroute(String url, CommandCallback callback);
 ```
 ```java
-NetworkTools.tracerout("www.example.com", new CommandCallback() {  
-	@Override  
-	public void onFinish(String output) {  
-		System.out.println(ouput);
-	}  
-  
-	@Override  
-    public void onError(Exception e) {  
-	    e.printStackTrace();
-	}  
+NetworkTools.tracerout("www.example.com", new CommandCallback() {
+    @Override 
+    public void onFinish(String output) {
+        System.out.println(ouput);
+    }
+    
+    @Override 
+    public void onError(Exception e) {
+        e.printStackTrace();
+    }  
 });
 ```
 **Important :** 
@@ -104,35 +104,35 @@ NetworkTools.checkForHosts("192.168.178", new HostCallback() {
 });
 ```
 Notice : </br>
-*default timeout : 1000 ms </br>
-default begin index : 0 </br>
-default end index : 254*
+*default timeout: 1000 ms </br>
+default begin index: 0 </br>
+default end index: 254*
 
 ---
 
 ### TOR exit node verification :
 
-All TOR exit node addresses are online available. Let's check if an IP address is a TOR exit address :
+All TOR exit node addresses are online available. Let's check if an IP address is a TOR exit address:
 ```java
-TorData.checkIpIsExitNode("XX.XXX.XXX.XXX", new CommandCallback() {  
-    @Override  
+TorData.checkIpIsExitNode("XX.XXX.XXX.XXX", new CommandCallback() {
+    @Override 
     public void onFinish(String output) {  
-          if(output == null) {
-	          System.out.println("IP is not a TOR exit node");
-	      } else {
-			  System.err.println("TOR exit node found !");
-		  }
+        if(output == null) {
+            System.out.println("IP is not a TOR exit node");
+        } else {
+            System.err.println("TOR exit node found !");
+        }
     }  
   
     @Override  
-    public void onError(Exception e) { 
-	      e.printStackTrace();
+    public void onError(Exception e) {
+        e.printStackTrace();
     }  
 });
 ```
 ----
 
-Following options are available as well :
+Following options are available:
 ```java
 static ArrayList<ExitNode> getAllExitNodes();
 ```
@@ -141,20 +141,4 @@ static void setTorExitAddressURL(String newUrl);
 ```
 ```java
 static void resetTorExitAddressURL();
-```
-
----
-
-### Locale lookup :
-
-Get the country code by the country name :
-```java
-LocalFinder.getCountryCode(String countryName);
-```
-Get the country name by the country code :
-```java
-LocalFinder.getCountryName(String countryCode);
-```
-```java
-String name = LocalFinder.getCountryName("DE");
 ```

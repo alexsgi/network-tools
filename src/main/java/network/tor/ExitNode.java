@@ -2,7 +2,7 @@ package network.tor;
 
 public class ExitNode {
 
-    private String name, ip;
+    private final String name, ip;
 
     public ExitNode(String name, String ip) {
         this.name = name;

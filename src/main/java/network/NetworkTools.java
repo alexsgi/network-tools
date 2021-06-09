@@ -51,6 +51,7 @@ public class NetworkTools {
         });
     }
 
+    @Deprecated
     public static void ping(String url, CommandCallback callback) {
         ParallelTask.runParallel(() -> {
             try {
@@ -63,7 +64,8 @@ public class NetworkTools {
         }, callback);
     }
 
-    public static void tracerout(String url, CommandCallback callback) {
+    @Deprecated
+    public static void traceroute(String url, CommandCallback callback) {
         ParallelTask.runParallel(() -> {
             try {
                 InputStream inputStream = (osName.toLowerCase().contains("windows")) ? NTools.tracerouteWin(url) : NTools.tracerouteLin(url);
@@ -98,7 +100,7 @@ public class NetworkTools {
         return sb.toString();
     }
 
-    public static interface HostCallback {
+    public interface HostCallback {
 
         void onDeviceFound(String host);
 
