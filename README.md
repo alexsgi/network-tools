@@ -1,12 +1,42 @@
 # NetworkTools
 ![CI](https://github.com/alexsgi/network-tools/actions/workflows/maven.yml/badge.svg)
-[![GitHub Release](https://img.shields.io/github/release/alexsgi/network-tools.svg?style=flat)]()
+[![](https://jitpack.io/v/alexsgi/network-tools.svg)](https://jitpack.io/#alexsgi/network-tools)
 
 Tools for some network operations like ping, tracert with Java. Check if an IP address is a TOR exit node.
 
 ## 1. Import
 
-Library was uploaded via GitHub. Newest version and instructions are [here](https://github.com/alexsgi/network-tools/packages/).
+**Gradle:**
+```gradle
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+```gradle
+dependencies {
+    implementation 'com.github.alexsgi:network-tools:VERSION'
+}
+```
+**Maven:**
+```maven
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+```maven
+<dependencies>
+    <dependency>
+        <groupId>com.github.alexsgi</groupId>
+        <artifactId>network-tools</artifactId>
+        <version>VERSION</version>
+    </dependency>
+</dependencies>
+```
 
 ## 2. Features
 
