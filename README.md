@@ -2,6 +2,8 @@
 ![CI](https://github.com/alexsgi/network-tools/actions/workflows/maven.yml/badge.svg)
 [![](https://jitpack.io/v/alexsgi/network-tools.svg)](https://jitpack.io/#alexsgi/network-tools)
 
+**THIS PROJECT IS DEPRECATED AND WON'T BE CONTINUED. SWITCH TO OTHER TOOLS INSTEAD.**
+
 Tools for some network operations like ping, tracert with Java. Check if an IP address is a TOR exit node.
 
 ## 1. Import
@@ -42,7 +44,7 @@ dependencies {
 
 ###  Network operations:
  
- **Ping :** (DEPRECATED)
+ **Ping:** (DEPRECATED)
  ```java
 NetworkTools.ping(String url, CommandCallback callback);
 ```
